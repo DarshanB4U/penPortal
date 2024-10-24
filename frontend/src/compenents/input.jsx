@@ -1,10 +1,7 @@
 export function Input({ placeholder }) {
-  return (
-    <div>
+    return (
       <input
-        className="  w-full  p-2 rounded-sm"
-        placeholder={placeholder}
-      />
-    </div>
+        className=" text-slate-100 max-w-md bg-orange-100 w-full  p-2 rounded-sm"
+        placeholder={placeholder} ></input>
   );
 }
