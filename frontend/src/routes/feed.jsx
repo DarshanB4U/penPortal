@@ -1,23 +1,54 @@
+import { useEffect, useState } from "react";
 import { Blog } from "../compenents/blog.jsx";
 import { Heading } from "../compenents/heading.jsx";
 import { Navbar } from "../compenents/navbar.jsx";
+import axios from "axios";
 
 export default function Feed() {
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+     
+        const response = await axios.get(
+          "http://localhost:3000/api/articles",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        console.log(response.data); // Log the full response
+        const data = response.data.articles; // Assuming the API returns articles in the "articles" key
+        setArticles(data); // Set the fetched data to state
+      } catch (error) {
+        console.error("Error fetching data:", error); // Error handling
+      }
+    }
+
+    fetchData(); // Call the function to fetch data
+    console.log(articles);
+  }, []);
   return (
     <>
-    <Navbar></Navbar>
-    <div className="m-2 p-3  "> 
-      <Blog authername={"Darshan"} publishdate={"2 NOV"} title={"JAVA vs Javascript key difference in boath the languages "} content={"lorem ashfjsdf  jhf sf werghjgdsdtyil; sfh sfshf kshfk sf skhfjdshfjshfsdhf ksjf hsdfh"}></Blog>
-    
-    <Blog authername={"Gayatri"} publishdate={"1 NOV"} title={"NEEt 2025 study plan for students "} content={"Creating an effective study plan for NEET 2025 requires strategic planning, consistent effort, and a focus on understanding the core subjects: Physics, Chemistry, and Biology. Here's a detailed approach"}></Blog>
-    
-    <Blog authername={"Prakhar"} publishdate={"1 NOV"} title={" the languages "} content={"lorem ashfjsdf  jhf sf  sfh sfshf kshfcvbnbvcxsdg']poiuytrdxc vnmkk sf skhfjdshfjshfsdhf ksjf hsdfh"}></Blog>
-    <Blog authername={"Sid"} publishdate={"1 NOV"} title={"JAVA vs Javascript key difference in boath the languages "} content={"lsdfghjijuhgforem ashfjsdf hi muf sf sfij name is d arshan ;ldsfoewhf  and ho3hwo are yoiue i am   dfghjkl;.,mhf sf  sfh sfshf kshfk sf skhfjdshfjshfsdhf ksjf hsdfh"}></Blog>
-    
-    <Blog authername={"Sid"} publishdate={"1 NOV"} title={"JAVA vs Javascript key difference in boath the languages "} content={"lsdfghjijuhgforem ashfjsdf hi muf sf sfij name is d arshan ;ldsfoewhf  and ho3hwo are yoiue i am   dfghjkl;.,mhf sf  sfh sfshf kshfk sf skhfjdshfjshfsdhf ksjf hsdfh"}></Blog></div>
-    
-    
+      <Navbar></Navbar>
+
+      <div className="pt-16">
+        {articles.map(function (article, index) {
+          return (
+            <div key={index} className="m-2 p-3  ">
+              <Blog
+                authername={article.authorName}
+                publishdate={article.publishDate}
+                title={
+                  "JAVA vs Javascript key difference in boath the languages "
+                }
+                content={article.content}
+              ></Blog>
+            </div>
+          );
+        })}
+      </div>
     </>
-  
   );
 }
