@@ -2,7 +2,7 @@
 export function Blog({ authername, publishdate, title, content }) {
   
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <div className="m-3 p-5 border-orange-600  hover:shadow-md shadow-rose-400  border-b max-w-xl ">
         <div className="flex gap-1  justify-start font-serif text-md  font-medium">
           <Avatar name={authername} />{" "}

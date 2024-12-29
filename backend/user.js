@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const zod = require("zod");
-const { createUser, checkuser, findUser } = require("./db");
+const { createUser, checkuser, findUser, createArticle, deleteArticle } = require("./db");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("./config");
+const { authMiddlware } = require("./middlewares/authMiddlware");
 
 /// signup body
 const signupbody = zod.object({
@@ -71,7 +72,7 @@ router.post("/signin", async (req, res) => {
   console.log(email, password);
 
   try {
-    const user = await findUser(email,password);
+    const user = await findUser(email, password);
     console.log(user);
 
     const payload = {
@@ -92,8 +93,35 @@ router.post("/signin", async (req, res) => {
 });
 
 //article creation route
-router.post("/article", (req, res) => {
-  res.send("article creates ");
+router.post("/createArticle", authMiddlware, async (req, res) => {
+  const descreption = req.body.descreption;
+  const body = req.body.content;
+  const authorId = req.userId;
+  const article = await createArticle(descreption, body, authorId);
+  console.log(article);
+  
+
+  res.send("article created ");
+});
+
+router.delete("/deleteArticle", authMiddlware, async (req, res) => {
+  const articleId = req.body.articleId;
+  console.log(articleId);
+  
+  let authorId = req.userId;
+  console.log(authorId);
+  
+  try{
+    const response = await deleteArticle(authorId,articleId)
+    console.log(response);
+   return res.status(200).json({message:"post deleted"})
+  }
+  catch(error){
+    console.log(error)
+    return res.status(409).json({message:"error"})
+
+
+  }
 });
 
 module.exports = router;

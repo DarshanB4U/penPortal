@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export function Signin() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -19,22 +19,21 @@ export function Signin() {
   };
 
   async function submit() {
-    try{const response = await axios.post(
-      "http://localhost:3000/user/signin/",
-      signinData
-    );
-      
-    const token = response.data.token
-    console.log(token);
-    localStorage.setItem('token',token)
-     navigate('/feed')
-}
-catch(error){
-  console.log(error);
-  
-  alert("unable to login user")
-}
-    
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/user/signin/",
+        signinData
+      );
+
+      const token = response.data.token;
+      console.log(token);
+      localStorage.setItem("token", token);
+      navigate("/feed");
+    } catch (error) {
+      console.log(error);
+
+      alert("unable to login user");
+    }
   }
 
   return (

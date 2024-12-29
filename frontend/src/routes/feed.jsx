@@ -34,16 +34,16 @@ export default function Feed() {
       <Navbar></Navbar>
 
       <div className="pt-16">
-        {articles.map(function (article, index) {
+        {articles.map(function (article,) {
           return (
-            <div key={index} className="m-2 p-3  ">
+            <div key={article.id} className="m-2 p-3 ">
               <Blog
-                authername={article.authorName}
-                publishdate={article.publishDate}
+                authername={article.author.name}
+                publishdate={article.createdAt}
                 title={
-                  "JAVA vs Javascript key difference in boath the languages "
+                  article.descreption
                 }
-                content={article.content}
+                content={article.body}
               ></Blog>
             </div>
           );

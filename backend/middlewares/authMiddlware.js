@@ -13,6 +13,8 @@ const authMiddlware = function (req, res, next) {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.userId = decoded.userId;
+    
+    
     next()
   } catch (error) {
     console.log("error from jwt try catch block ", error)
