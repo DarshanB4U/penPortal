@@ -39,11 +39,7 @@ async function checkuser(email) {
   }
   return false;
 }
-// async function darshan() {
-//   const darshan = await checkuser("darshanbondre0@gmail.com");
-//   console.log(darshan);
-// }
-// darshan();
+
 
 // function to create new user
 const createUser = async (name, email, password) => {
