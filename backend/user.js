@@ -18,14 +18,14 @@ router.post("/signup", async (req, res) => {
   const { success } = signupbody.safeParse(req.body);
   if (!success) {
     return res.status(411).json({
-      massage: "incorrect inputs ",
+      message: "incorrect inputs",
     });
   }
   const uE = await checkuser(req.body.email);
 
   if (uE) {
     console.log("user already exist");
-    return res.status(411).json({ massage: "user already exist " });
+    return res.status(411).json({ message: "user already exist" });
   }
 
   try {
@@ -64,7 +64,7 @@ router.post("/signin", async (req, res) => {
   const { success } = signinbody.safeParse(req.body);
   if (!success) {
     return res.status(411).json({
-      massage: "incorrect inputs ",
+      message: "incorrect inputs",
     });
   }
   const email = req.body.email;
@@ -88,7 +88,7 @@ router.post("/signin", async (req, res) => {
   } catch (e) {
     return res
       .status(500)
-      .json({ massage: "user not found or unable to login" });
+      .json({ message: "user not found or unable to login" });
   }
 });
 

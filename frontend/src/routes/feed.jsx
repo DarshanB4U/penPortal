@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Blog } from "../compenents/blog.jsx";
-import { Heading } from "../compenents/heading.jsx";
-import { Navbar } from "../compenents/navbar.jsx";
+import { Blog } from "../components/blog.jsx";
+// import { Heading } from "../components/heading.jsx";
+import { Navbar } from "../components/navbar.jsx";
 import axios from "axios";
 
 export default function Feed() {
@@ -33,10 +33,10 @@ export default function Feed() {
     <>
       <Navbar></Navbar>
 
-      <div className="pt-16">
+      <div className="">
         {articles.map(function (article,) {
           return (
-            <div key={article.id} className="m-2 p-3 ">
+            <div key={article.id} >
               <Blog
                 authername={article.author.name}
                 publishdate={article.createdAt}
@@ -48,6 +48,7 @@ export default function Feed() {
             </div>
           );
         })}
+        <div></div>
       </div>
     </>
   );

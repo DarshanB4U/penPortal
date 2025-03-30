@@ -1,11 +1,7 @@
-import Tiptap from "../compenents/tiptap"
+// import Tiptap from "../components/tiptap"
 
 const CreateArt = () => {
-  return (
-    <div className="card">
-      <Tiptap />
-    </div>
-  )
-}
+  return <div className="card">{/* <Tiptap /> */}</div>;
+};
 
-export default CreateArt
+export default CreateArt;
